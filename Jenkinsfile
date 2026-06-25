@@ -2,6 +2,10 @@ pipeline {
 
     agent any
 
+    tools {
+       maven 'Maven'
+    }
+
     stages {
 
         stage('Checkout') {
@@ -10,7 +14,7 @@ pipeline {
             }
         }
 
-        stage('Build + Test + Coverage') {
+        stage('Build') {
             steps {
                 sh '''
                     chmod +x mvnw
@@ -19,6 +23,15 @@ pipeline {
             }
         }
 
+        stage() {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        ./mvnw sonar:sonar
+                    '''
+                }
+            }
+        }
 
 
     }
