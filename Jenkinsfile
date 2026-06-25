@@ -10,20 +10,38 @@ pipeline {
             }
         }
 
-        stage('Build') {
+        stage('Compile') {
             steps {
                 sh '''
                     chmod +x mvnw
-                    ./mvnw clean package
+                    ./mvnw clean compile
                 '''
             }
         }
 
-        stage('Unit Test') {
+        stage('JUnit Tests') {
             steps {
                 sh './mvnw test'
             }
         }
 
+        stage('Package') {
+            steps {
+                sh './mvnw package -DskipTests'
+            }
+        }
+
     }
+
+    post {
+
+       always {
+
+          junit '**/target/surefire-reports/*.xml'
+
+       }
+
+    }
+
+
 }
