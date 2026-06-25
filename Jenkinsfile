@@ -10,26 +10,16 @@ pipeline {
             }
         }
 
-        stage('Compile') {
+        stage('Build + Test + Coverage') {
             steps {
                 sh '''
                     chmod +x mvnw
-                    ./mvnw clean compile
+                    ./mvnw clean verify
                 '''
             }
         }
 
-        stage('JUnit Tests') {
-            steps {
-                sh './mvnw test'
-            }
-        }
 
-        stage('Package') {
-            steps {
-                sh './mvnw package -DskipTests'
-            }
-        }
 
     }
 
@@ -38,6 +28,8 @@ pipeline {
        always {
 
           junit '**/target/surefire-reports/*.xml'
+
+          jacoco()
 
        }
 
