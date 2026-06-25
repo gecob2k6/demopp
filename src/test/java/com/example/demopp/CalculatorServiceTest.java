@@ -17,4 +17,9 @@ public class CalculatorServiceTest {
     void testMultiply(){
         assertEquals(12, service.multiply(3,4));
     }
+
+    @Test
+    void testDivide(){
+        assertEquals(5, service.divide(15, 3));
+    }
 }
