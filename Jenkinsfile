@@ -23,8 +23,7 @@ pipeline {
             steps {
                 withSonarQubeEnv('SonarQube') {
                     sh '''
-                        chmod +x mvnw
-                        ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:4.0.0.4121:sonar
+                        ./mvnw sonar:sonar
                     '''
                 }
             }

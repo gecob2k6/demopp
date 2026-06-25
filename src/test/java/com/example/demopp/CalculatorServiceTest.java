@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CalculatorServiceTest {
+class CalculatorServiceTest {
 
     CalculatorService service = new CalculatorService();
 
@@ -20,8 +20,6 @@ public class CalculatorServiceTest {
 
     @Test
     void testDivide(){
-//        assertEquals(5, service.divide(15, 3));
-
         assertEquals(0, service.divide(10, 0));
     }
 }
